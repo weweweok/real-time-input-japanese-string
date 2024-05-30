@@ -5,12 +5,11 @@ const App: React.FC = () => {
   const [isComposing, setIsComposing] = useState<boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!isComposing) {
-      setInputValue(e.target.value);
-    }
+    setInputValue(e.target.value);
   };
 
   const handleCompositionStart = (e: CompositionEvent<HTMLInputElement>) => {
+    console.log("isComposing", isComposing);
     setIsComposing(true);
   };
 
@@ -19,15 +18,9 @@ const App: React.FC = () => {
   };
 
   const handleCompositionEnd = (e: CompositionEvent<HTMLInputElement>) => {
+    console.log("isComposing", isComposing);
     setIsComposing(false);
     setInputValue(e.currentTarget.value); // 入力確定時に値を更新
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
-    if (isComposing) {
-      setInputValue(e.currentTarget.value);
-    }
   };
 
   return (
@@ -41,7 +34,6 @@ const App: React.FC = () => {
         onCompositionStart={handleCompositionStart}
         onCompositionUpdate={handleCompositionUpdate}
         onCompositionEnd={handleCompositionEnd}
-        onInput={handleInput}
       />
     </div>
   );
